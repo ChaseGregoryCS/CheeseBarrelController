@@ -61,12 +61,14 @@
                                 <th style="width: 25%;"><h5 style = "text-align: center;" > De-Humidifier </h5></th>
                             </tr>
                             <tr>
-                                <?php
-                                        $Obj->DisplayControlButton("CO");
-                                        $Obj->DisplayControlButton("HE");
-                                        $Obj->DisplayControlButton("HU");
-                                        $Obj->DisplayControlButton("DH");
-                                ?>
+                                <form method"post" action="CheeseMainPage.php">
+                                    <?php
+                                            $Obj->DisplayControlButton("CO");
+                                            $Obj->DisplayControlButton("HE");
+                                            $Obj->DisplayControlButton("HU");
+                                            $Obj->DisplayControlButton("DH");
+                                    ?>
+                                <form>
                             </tr>
                         </table>
                     </div>

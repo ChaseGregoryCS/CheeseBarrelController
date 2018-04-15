@@ -44,14 +44,19 @@ div.rangeBar{
     padding-left: 30%
 }
 
+div.btnsIOAuto{
+    width: 20%;
+    color:red;
+}
+
 div.btnsIOInActive{
     width: 40%;
-    background-color:#D3D3D3;
+    color:#D3D3D3;
 }
 
 div.btnsIOActive{
     width: 40%;
-    background-color:#A9A9A9;
+    color:#A9A9A9;
 }
 
 div.btnsOn{

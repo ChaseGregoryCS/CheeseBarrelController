@@ -48,10 +48,10 @@
                     $temp = $this->StateOf($type);
                     switch ($temp){
                         case 'I':
-                             $pVal = '<td> <div class="btnsOn"> <input class="btnsIOActive" width=3 type="submit" value="I" name="'.$type.'> </div> <div class="btnsOff"> <input class="btnsIOInActive" width=3 type="submit" value="O" name="'.$type.'"> </div> </td>';
+                             $pVal = '<td><center><div class="btnsOn"> <input class="btnsIOInActive" width=3 type="submit" value="I" name="On'.$type.'> </div> <div class="btnsAuto"> <input class="btnsIOAuto" width=3 type="submit" value="A" name="Auto'.$type.'> </div><div class="btnsOff"> <input class="btnsIOActive" width=3 type="submit" value="O" name="Off'.$type.'"> </div> </center> </td> ';
                             break;
                         case 'O':
-                             $pVal = '<td> <div class="btnsOn"> <input class="btnsIOInActive" width=3 type="submit" value="I" name="'.$type.'> </div> <div class="btnsOff"> <input class="btnsIOActive" width=3 type="submit" value="O" name="'.$type.'"> </div> </td>';
+                             $pVal = '<td> <center><div class="btnsOn"> <input class="btnsIOActive" width=3 type="submit" value="I" name="On'.$type.'> </div> <div class="btnsAuto"> <input class="btnsIOAuto" width=3 type="submit" value="A" name="Auto'.$type.'> </div> <div class="btnsOff"> <input class="btnsIOInActive" width=3 type="submit" value="O" name="Off'.$type.'"> </div> </center> </td>';
                             break;
                         }
                 }
