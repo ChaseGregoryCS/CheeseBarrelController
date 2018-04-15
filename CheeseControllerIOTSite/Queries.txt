@@ -1,0 +1,23 @@
+CREATE TABLE Stats (
+    StateID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    State varchar(3) NULL DEFAULT '',
+    temperature int,
+    humidity int,
+    date varchar(25) NULL DEFAULT '' 
+) COLLATE='utf8_bin';
+
+CREATE TABLE Settings (
+    SettingID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name varchar(10) NULL DEFAULT '',
+    value varchar(3) NULL DEFAULT ''
+) COLLATE='utf8_bin';
+
+INSERT INTO Settings VALUES 
+    (1,"TempUpper", "1"),
+    (2,"TempLower", "1"),
+    (3,"HumUpper", "1"),
+    (4,"HumLower", "1"),
+    (5,"State", "I/I"),
+    (6,"Update", "5"),
+    (7,"CaptureRate", "10"),
+    (8,"SystemIO", "On");

@@ -1,0 +1,75 @@
+h2.subtitle {
+    font-size: 25px;
+    margin-left: 10%;
+    background-color: gray;
+}
+
+h2.maintitle{
+    font-size: 40px;
+    margin-top: 5%;
+    margin-left: 35%;
+    padding-bottom: 12%;
+}
+
+input.rangeInput{
+    size: 4;
+}
+
+div.headerDivOne{
+    width: 39%;
+    float: left; 
+    background-color: gray;
+}
+
+div.headerDivTwo{
+    background-color: green;
+    padding:.3%;
+    width: 60%;
+    border-style: solid; 
+}
+
+div.upperRng{
+    padding-right: 10%;
+    padding-left: 10%;
+    float: right;
+}
+
+div.lowerRng{
+    padding-left: 10%;
+    padding-right: 10%;
+    float: left;
+}
+
+div.rangeBar{
+    float: center;
+    padding-left: 30%
+}
+
+div.btnsIO{
+    width: 20%;
+}
+
+div.btnsOn{
+    float:left;
+    margin-left: 25%;
+}
+
+div.bodyDivMain{
+    float:left; 
+    width:100%;
+    border-style: solid; 
+}
+
+div.btnsOff{
+    float:right;
+    margin-right: 25%;
+}
+
+input.btnsIO{
+    margin-bottom: 3%;
+}
+
+input.txt_rangeSubmit{
+    margin-left: 47%;
+    
+}
