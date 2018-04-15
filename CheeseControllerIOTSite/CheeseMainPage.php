@@ -3,8 +3,13 @@
 
 <html>
     <head>
-        <?php require_once('php/setting.php');
+        <?php 
+            require_once('php/setting.php');
             $Obj = new ControllerInterface();
+            
+            if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $Obj ->SubmitControl($_POST["Temp_Lower_Range"],$_POST["Temp_Upper_Range"],$_POST["Hum_Upper_Range"],$_POST["Hum_Lower_Range"]);
+            }
         ?>
     
         <link rel="stylesheet" href="CheeseMainPage.css">
@@ -16,10 +21,7 @@
 
             <br/>
             <div class="headerDivTwo" style="float: right;">
-                <form 
-                    action="<?php $Obj->SubmitControl($_GET["Temp_Upper_Range"],$_GET["Temp_Lower_Range"],
-                                                      $_GET["Hum_Upper_Range"],$_GET["Hum_Lower_Range"]);?>" 
-                    method="get">
+                <form method="post" action="CheeseMainPage.php" name="main" id="main" >
                     <div class="upperRng" style="padding-top: 2%; float:left;;">
                         :Upper Range  <?php 
                         echo ' <input class="rangeInput " style="float: left;" type="text" size="3" name="Temp_Upper_Range" id="Temp_Upper_Range" value = "' . $Obj->GetTempUpper() . ' "><br />';  
@@ -47,9 +49,8 @@
                     </div>
                     <br/>
                     <br/>
-                
                     <input class="txt_rangeSubmit" type="submit" value="Submit">
-                </form>
+                    </form>
                 <div>
                 <br/>
                     <table style="width:100%">
@@ -60,38 +61,12 @@
                                 <th style="width: 25%;"><h5 style = "text-align: center;" > De-Humidifier </h5></th>
                             </tr>
                             <tr>
-                                <td>
-                                    <div class="btnsOn">
-                                        <input class="btnsIO" width=3 type="submit" value="I">
-                                    </div>
-                                    <div class="btnsOff">
-                                        <input class="btnsIO" width=3 type="submit" value="O">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="btnsOn">
-                                        <input class="btnsIO" width=3 type="submit" value="I">
-                                    </div>
-                                    <div class="btnsOff">
-                                        <input class="btnsIO" width=3 type="submit" value="O">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="btnsOn">
-                                        <input class="btnsIO" width=3 type="submit" value="I">
-                                    </div>
-                                    <div class="btnsOff">
-                                        <input class="btnsIO" width=3 type="submit" value="O">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="btnsOn">
-                                        <input class="btnsIO" width=3 type="submit" value="I">
-                                    </div>
-                                    <div class="btnsOff">
-                                        <input class="btnsIO" width=3 type="submit" value="O">
-                                    </div>
-                                </td>
+                                <?php
+                                        $Obj->DisplayControlButton("CO");
+                                        $Obj->DisplayControlButton("HE");
+                                        $Obj->DisplayControlButton("HU");
+                                        $Obj->DisplayControlButton("DH");
+                                ?>
                             </tr>
                         </table>
                     </div>

@@ -11,12 +11,11 @@
                 $response = $this->dbo->dbc->query($Query);
                 if (!$response){
                     $rVal = "Error! " . $this->dbo->dbc->error;
-                } elseif(substr($Query, 1) == "S" ) {
+                } elseif(substr($Query, 0,1) == 'S') {
                     $temp = $response->fetch_assoc();
                     $rVal = $temp["value"];
                 } else {
                     $rVal = true;
-                    $rVal = "Shit";
                 }
                 return $rVal;
         }
@@ -27,6 +26,39 @@
                 $this->dbo = new dbConnectObj();
             }
         
+            #Button Control
+            function DisplayControlButton($type){
+                $pVal = "error";
+                $found = false;
+                switch ($type) {
+                    case "CO":
+                        $found = true;
+                        break;
+                    case "HE":
+                        $found = true;
+                        break;
+                    case "DH":
+                        $found = true;
+                        break;
+                    case "HU":
+                        $found = true;
+                        break;
+                }
+                if($found){
+                    $temp = $this->StateOf($type);
+                    switch ($temp){
+                        case 'I':
+                             $pVal = '<td> <div class="btnsOn"> <input class="btnsIOActive" width=3 type="submit" value="I" name="'.$type.'> </div> <div class="btnsOff"> <input class="btnsIOInActive" width=3 type="submit" value="O" name="'.$type.'"> </div> </td>';
+                            break;
+                        case 'O':
+                             $pVal = '<td> <div class="btnsOn"> <input class="btnsIOInActive" width=3 type="submit" value="I" name="'.$type.'> </div> <div class="btnsOff"> <input class="btnsIOActive" width=3 type="submit" value="O" name="'.$type.'"> </div> </td>';
+                            break;
+                        }
+                }
+                echo $pVal;
+            }
+        
+            #Transformers/Accessors
             function GetTempUpper(){
                 $Query = "SELECT value FROM Settings WHERE name='TempUpper'";
                 $rVal = $this->RunQuerry($Query);
@@ -81,10 +113,10 @@
                 $rVal = $this->RunQuerry($Query);
                 switch ($which){
                     case "CO":
-                        $rVal = substr($rVal,0);
+                        $rVal = substr($rVal,0,1);
                         break;
                     case "HE":
-                        $rVal = substr($rVal,0);
+                        $rVal = substr($rVal,0,1);
                         break;
                     case "DH":
                         $rVal = substr($rVal,2);
@@ -100,51 +132,50 @@
                 return $rVal;
             }
             
-            
             function SetTempUpper($value){
-                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='TempUpper';";
+                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='TempUpper'";
                 $rVal = $this->RunQuerry($Query);
                 if(! $rVal) {echo "error";}
                 return $rVal;
             }
             
             function SetTempLower($value){
-                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='TempLower';";
+                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='TempLower'";
                 $rVal = $this->RunQuerry($Query);
                 if(! $rVal) {echo "error";}
                 return $rVal;
             }
             
             function SetHumdityUpper($value){
-                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='HumUpper';";
+                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='HumUpper'";
                 $rVal = $this->RunQuerry($Query);
                 if(! $rVal) {echo "error";}
                 return $rVal;
             }
             
             function SetHumidityLower($value){
-                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='HumLower';";
+                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='HumLower'";
                 $rVal = $this->RunQuerry($Query);
                 if(! $rVal) {echo "error";}
                 return $rVal;
             }
             
             function SetUpdateRate($value){
-                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='Update';";
+                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='Update'";
                 $rVal = $this->RunQuerry($Query);
                 if(! $rVal) {echo "error";}
                 return $rVal;
             }
             
             function SetCaptureRate($value){
-                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='SystemIO';";
+                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='SystemIO'";
                 $rVal = $this->RunQuerry($Query);
                 if(! $rVal) {echo "error";}
                 return $rVal;
             }
             
             function SetSystemIO($value){
-                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='State';";
+                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='State'";
                 $rVal = $this->RunQuerry($Query);
                 if(! $rVal) {echo "error";}
                 return $rVal;

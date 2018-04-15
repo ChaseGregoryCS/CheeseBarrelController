@@ -23,7 +23,6 @@ div.headerDivOne{
 
 div.headerDivTwo{
     background-color: green;
-    padding:.3%;
     width: 60%;
     border-style: solid; 
 }
@@ -45,8 +44,14 @@ div.rangeBar{
     padding-left: 30%
 }
 
-div.btnsIO{
-    width: 20%;
+div.btnsIOInActive{
+    width: 40%;
+    background-color:#D3D3D3;
+}
+
+div.btnsIOActive{
+    width: 40%;
+    background-color:#A9A9A9;
 }
 
 div.btnsOn{
