@@ -48,10 +48,48 @@
                     $temp = $this->StateOf($type);
                     switch ($temp){
                         case 'I':
-                             $pVal = '<td><center><div class="btnsOn"> <input class="btnsIOInActive" width=3 type="submit" value="I" name="On'.$type.'> </div> <div class="btnsAuto"> <input class="btnsIOAuto" width=3 type="submit" value="A" name="Auto'.$type.'> </div><div class="btnsOff"> <input class="btnsIOActive" width=3 type="submit" value="O" name="Off'.$type.'"> </div> </center> </td> ';
+                             $pVal = '<td>
+                                        <table style="width:100%; border:solid;">
+                                            <tr>
+                                                <th style="width: 25%;"><h5 style = "text-align: center;" > On </h5></th>
+                                                <th style="width: 25%;"><h5 style = "text-align: center;" > Auto </h5></th>
+                                                <th style="width: 25%;"><h5 style = "text-align: center;" > Off </h5></th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button id="btnIO" style="background-color:transparent;"><img src="img/onButton.jpeg"></button>
+                                                </td>
+                                                <td>
+                                                    <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
+                                                </td>
+                                                <td>
+                                                    <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>';
                             break;
                         case 'O':
-                             $pVal = '<td> <center><div class="btnsOn"> <input class="btnsIOActive" width=3 type="submit" value="I" name="On'.$type.'> </div> <div class="btnsAuto"> <input class="btnsIOAuto" width=3 type="submit" value="A" name="Auto'.$type.'> </div> <div class="btnsOff"> <input class="btnsIOInActive" width=3 type="submit" value="O" name="Off'.$type.'"> </div> </center> </td>';
+                             $pVal = '<td>
+                                        <table style="width:100%; border:solid;">
+                                            <tr>
+                                                <th style="width: 25%;"><h5 style = "text-align: center;" > On </h5></th>
+                                                <th style="width: 25%;"><h5 style = "text-align: center;" > Auto </h5></th>
+                                                <th style="width: 25%;"><h5 style = "text-align: center;" > Off </h5></th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
+                                                </td>
+                                                <td>
+                                                    <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
+                                                </td>
+                                                <td>
+                                                    <button id="btnIO" style="background-color:transparent;"><img src="img/onButton.jpeg"></button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>';
                             break;
                         }
                 }

@@ -7,8 +7,15 @@
             require_once('php/setting.php');
             $Obj = new ControllerInterface();
             
-            if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-                $Obj ->SubmitControl($_POST["Temp_Lower_Range"],$_POST["Temp_Upper_Range"],$_POST["Hum_Upper_Range"],$_POST["Hum_Lower_Range"]);
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' ){
+                
+                $url = $_SERVER['QUERY_STRING'];
+                parse_str($url, $get_array);
+                if('1' == $get_array['b']){
+                    
+                } else {
+                    $Obj ->SubmitControl($_POST["Temp_Lower_Range"],$_POST["Temp_Upper_Range"],$_POST["Hum_Upper_Range"],$_POST["Hum_Lower_Range"]);
+                }
             }
         ?>
     
@@ -21,7 +28,7 @@
 
             <br/>
             <div class="headerDivTwo" style="float: right;">
-                <form method="post" action="CheeseMainPage.php" name="main" id="main" >
+                <form method="post" action="CheeseMainPage.php?b=0" name="main" id="main" >
                     <div class="upperRng" style="padding-top: 2%; float:left;;">
                         :Upper Range  <?php 
                         echo ' <input class="rangeInput " style="float: left;" type="text" size="3" name="Temp_Upper_Range" id="Temp_Upper_Range" value = "' . $Obj->GetTempUpper() . ' "><br />';  
@@ -61,7 +68,7 @@
                                 <th style="width: 25%;"><h5 style = "text-align: center;" > De-Humidifier </h5></th>
                             </tr>
                             <tr>
-                                <form method"post" action="CheeseMainPage.php">
+                                <form method="post" action="CheeseMainPage.php?b=1">
                                     <?php
                                             $Obj->DisplayControlButton("CO");
                                             $Obj->DisplayControlButton("HE");
@@ -84,8 +91,8 @@
     <br />
     <br />
     
-    <body>
-        <div class="bodyDivMain" >
+    <body bgcolor="gray">
+        <div class="bodyDivMain"  >
             <table style="width:100%; margin-bottom:5%;">
                 <tr>
                     <th style="width: 25%;"><h5 style = "text-align: center;" > Temperature V Time </h5></th>
