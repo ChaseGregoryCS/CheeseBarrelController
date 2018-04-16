@@ -9,13 +9,32 @@
             
             if ($_SERVER['REQUEST_METHOD'] == 'POST' ){
                 
-                $url = $_SERVER['QUERY_STRING'];
-                parse_str($url, $get_array);
-                if('1' == $get_array['b']){
-                    
+                $queryVals = $_SERVER['QUERY_STRING'];
+                parse_str($queryVals, $get_array);
+                if ($get_array['b'] == '0'){
+                    $Obj->SubmitControl($_POST["Temp_Lower_Range"],$_POST["Temp_Upper_Range"],$_POST["Hum_Upper_Range"],$_POST["Hum_Lower_Range"]);
                 } else {
-                    $Obj ->SubmitControl($_POST["Temp_Lower_Range"],$_POST["Temp_Upper_Range"],$_POST["Hum_Upper_Range"],$_POST["Hum_Lower_Range"]);
+                    $currState = $Obj->GetState();
+                    switch ($get_array['t']){
+                        case 'HE':
+                            $temp = "h" . substr($currState,1,3);
+                            $Obj->SetManualState($temp);
+                            break;
+                        case 'CO':
+                            $temp = "c" . substr($currState,1,3);
+                            $Obj->SetManualState($temp);
+                            break;
+                        case 'HU':
+                            $temp = substr($currState,0,2) . "h";
+                            $Obj->SetManualState($temp);
+                            break;
+                        case 'DH':
+                            $temp = substr($currState,0,2) . "d";
+                            $Obj->SetManualState($temp);
+                            break;
+                    }
                 }
+                
             }
         ?>
     
@@ -68,14 +87,12 @@
                                 <th style="width: 25%;"><h5 style = "text-align: center;" > De-Humidifier </h5></th>
                             </tr>
                             <tr>
-                                <form method="post" action="CheeseMainPage.php?b=1">
-                                    <?php
-                                            $Obj->DisplayControlButton("CO");
-                                            $Obj->DisplayControlButton("HE");
-                                            $Obj->DisplayControlButton("HU");
-                                            $Obj->DisplayControlButton("DH");
-                                    ?>
-                                <form>
+                                <?php
+                                        $Obj->DisplayControlButton("HE");
+                                        $Obj->DisplayControlButton("CO");
+                                        $Obj->DisplayControlButton("HU");
+                                        $Obj->DisplayControlButton("DH");
+                                ?>
                             </tr>
                         </table>
                     </div>

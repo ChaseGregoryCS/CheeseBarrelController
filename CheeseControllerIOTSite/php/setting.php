@@ -45,9 +45,11 @@
                         break;
                 }
                 if($found){
-                    $temp = $this->StateOf($type);
+                    $temp = strtoupper($this->StateOf($type));
                     switch ($temp){
-                        case 'I':
+                        case 'D':
+                        case 'H':
+                        case 'C':
                              $pVal = '<td>
                                         <table style="width:100%; border:solid;">
                                             <tr>
@@ -55,21 +57,24 @@
                                                 <th style="width: 25%;"><h5 style = "text-align: center;" > Auto </h5></th>
                                                 <th style="width: 25%;"><h5 style = "text-align: center;" > Off </h5></th>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <button id="btnIO" style="background-color:transparent;"><img src="img/onButton.jpeg"></button>
-                                                </td>
-                                                <td>
-                                                    <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
-                                                </td>
-                                                <td>
-                                                    <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
-                                                </td>
-                                            </tr>
+                                            <form method="post" action="CheeseMainPage.php?b=1&t='. $type . '">
+                                                <tr>
+                                                    <td>
+                                                        <button id="btnIO" style="background-color:transparent;"><img src="img/onButton.jpeg"></button>
+                                                    </td>
+                                                    <td>
+                                                        <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
+                                                    </td>
+                                                    <td>
+                                                        <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
+                                                    </td>
+                                                </tr>
+                                            </form>
                                         </table>
                                     </td>';
                             break;
-                        case 'O':
+                        case 'I':
+                        default:
                              $pVal = '<td>
                                         <table style="width:100%; border:solid;">
                                             <tr>
@@ -77,17 +82,19 @@
                                                 <th style="width: 25%;"><h5 style = "text-align: center;" > Auto </h5></th>
                                                 <th style="width: 25%;"><h5 style = "text-align: center;" > Off </h5></th>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
-                                                </td>
-                                                <td>
-                                                    <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
-                                                </td>
-                                                <td>
-                                                    <button id="btnIO" style="background-color:transparent;"><img src="img/onButton.jpeg"></button>
-                                                </td>
-                                            </tr>
+                                            <form method="post" action="CheeseMainPage.php?b=1&t='. $type . '">
+                                                <tr>
+                                                    <td>
+                                                        <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
+                                                    </td>
+                                                    <td>
+                                                        <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
+                                                    </td>
+                                                    <td>
+                                                        <button id="btnIO" style="background-color:transparent;"><img src="img/onButton.jpeg"></button>
+                                                    </td>
+                                                </tr>
+                                            </form>
                                         </table>
                                     </td>';
                             break;
@@ -146,6 +153,13 @@
                 return $rVal;
             }
             
+            function GetState(){
+                $Query = "SELECT value FROM Settings WHERE name='State'";
+                $rVal = $this->RunQuerry($Query);
+                if(! $rVal) {return "error";}
+                return $rVal;
+            }
+            
             function StateOf($which){
                 $Query = "SELECT value FROM Settings WHERE name='State'";
                 $rVal = $this->RunQuerry($Query);
@@ -169,6 +183,15 @@
                 
                 return $rVal;
             }
+            
+            
+            function SetManualState($state){
+                $Query = "UPDATE Settings SET value='" . $state . "' WHERE name='State'";
+                $rVal = $this->RunQuerry($Query);
+                if(! $rVal) {echo "error";}
+                return $rVal;
+            }
+            
             
             function SetTempUpper($value){
                 $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='TempUpper'";
