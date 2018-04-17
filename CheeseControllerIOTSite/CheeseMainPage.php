@@ -15,29 +15,74 @@
                     $Obj->SubmitControl($_POST["Temp_Lower_Range"],$_POST["Temp_Upper_Range"],$_POST["Hum_Upper_Range"],$_POST["Hum_Lower_Range"]);
                 } else {
                     $currState = $Obj->GetState();
-                    switch ($get_array['t']){
+                    $io = substr($get_array['t'],2);
+                    switch (substr($get_array['t'],0,2)){
                         case 'HE':
-                            $temp = "h" . substr($currState,1,3);
-                            $Obj->SetManualState($temp);
-                            break;
+                            switch($io){
+                                case 'i':
+                                    $temp = "h" . substr($currState,1);
+                                    $Obj->SetManualState($temp);
+                                    break;
+                                case 'o':
+                                    $temp = "i" . substr($currState,1);
+                                    $Obj->SetManualState($temp);
+                                    break;
+                                }
                         case 'CO':
-                            $temp = "c" . substr($currState,1,3);
-                            $Obj->SetManualState($temp);
+                            switch($io){
+                                case 'i':
+                                    $temp = "c" . substr($currState,1);
+                                    $Obj->SetManualState($temp);
+                                    break;
+                                case 'o':
+                                    $temp = "i" . substr($currState,1);
+                                    $Obj->SetManualState($temp);
+                                    break;
+                                }
                             break;
                         case 'HU':
-                            $temp = substr($currState,0,2) . "h";
-                            $Obj->SetManualState($temp);
+                            switch($io){
+                                case 'i':
+                                    $temp = substr($currState,0,2) . "h";
+                                    $Obj->SetManualState($temp);
+                                    break;
+                                case 'o':
+                                    $temp =  substr($currState,0,2) . "i";
+                                    $Obj->SetManualState($temp);
+                                    break;
+                                }
                             break;
                         case 'DH':
-                            $temp = substr($currState,0,2) . "d";
-                            $Obj->SetManualState($temp);
+                            switch($io){
+                                case 'i':
+                                    $temp = substr($currState,0,2) . "d";
+                                    $Obj->SetManualState($temp);
+                                    break;
+                                case 'o':
+                                    $temp =  substr($currState,0,2) . "i";
+                                    $Obj->SetManualState($temp);
+                                    break;
+                                }
                             break;
+                        }
+                        if($io == 'a'){
+                            $currState = $Obj->GetState();
+                            switch (substr($get_array['t'],0,2)){
+                                case 'HE':
+                                case 'CO':
+                                    $temp = strtoupper(substr($currState,0,1)) . substr($currState,1);
+                                    $Obj->SetManualState($temp);
+                                    break;
+                                case 'HU':
+                                case 'DH':
+                                    $temp = substr($currState,0,2) . strtoupper(substr($currState,2));
+                                    $Obj->SetManualState($temp);
+                                    break;
+                            }
+                        }
                     }
                 }
-                
-            }
         ?>
-    
         <link rel="stylesheet" href="CheeseMainPage.css">
         <div style="background-color: gray;" >
             <div class="headerDivOne">

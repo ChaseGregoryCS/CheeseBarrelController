@@ -5,6 +5,24 @@
     {
         private $dbo;
         
+        private function GetControlArr(){
+            $rArr = array('HE'=>0,'CO'=>0,'HU'=>0,'DH'=>0);
+            $val = strtoupper($this->StateOf("HE"));
+            if ($val == "H"){
+                $rArr['HE'] = 1;
+            } elseif ($val == "C") {
+                $rArr['CO'] = 1;
+            }
+            
+            $val = strtoupper($this->StateOf("HU"));
+            if ($val == "H"){
+                $rArr['HU'] = 1;
+            } elseif ($val == "D") {
+                $rArr['DH'] = 1;
+            }
+            return $rArr;
+        }
+        
         protected function RunQuerry($Query){
                 $rVal = false;
                 
@@ -20,6 +38,7 @@
                 return $rVal;
         }
             
+            
         public
         
             function __construct(){
@@ -28,81 +47,72 @@
         
             #Button Control
             function DisplayControlButton($type){
-                $pVal = "error";
-                $found = false;
-                switch ($type) {
-                    case "CO":
-                        $found = true;
-                        break;
-                    case "HE":
-                        $found = true;
-                        break;
-                    case "DH":
-                        $found = true;
-                        break;
-                    case "HU":
-                        $found = true;
-                        break;
+                $ctlArr = $this->GetControlArr();
+                if ($this->StateOf($type) == strtoupper($this->StateOf($type))){
+                    $auto = "on";
+                } else { 
+                    $auto = "off"; 
                 }
-                if($found){
-                    $temp = strtoupper($this->StateOf($type));
-                    switch ($temp){
-                        case 'D':
-                        case 'H':
-                        case 'C':
-                             $pVal = '<td>
-                                        <table style="width:100%; border:solid;">
-                                            <tr>
-                                                <th style="width: 25%;"><h5 style = "text-align: center;" > On </h5></th>
-                                                <th style="width: 25%;"><h5 style = "text-align: center;" > Auto </h5></th>
-                                                <th style="width: 25%;"><h5 style = "text-align: center;" > Off </h5></th>
-                                            </tr>
-                                            <form method="post" action="CheeseMainPage.php?b=1&t='. $type . '">
-                                                <tr>
-                                                    <td>
-                                                        <button id="btnIO" style="background-color:transparent;"><img src="img/onButton.jpeg"></button>
-                                                    </td>
-                                                    <td>
-                                                        <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
-                                                    </td>
-                                                    <td>
-                                                        <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
-                                                    </td>
-                                                </tr>
+    
+                if($ctlArr[ $type ] == 1) {
+                        $pVal = '
+                            <td>
+                                <table style="width:100%; border:solid;">
+                                    <tr>
+                                        <th style="width: 25%;"><h5 style = "text-align: center;" > Off </h5></th>
+                                        <th style="width: 25%;"><h5 style = "text-align: center;" > Auto </h5></th>
+                                        <th style="width: 25%;"><h5 style = "text-align: center;" > On </h5></th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <form method="post" action="CheeseMainPage.php?b=1&t='. $type . 'o">
+                                                <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
                                             </form>
-                                        </table>
-                                    </td>';
-                            break;
-                        case 'I':
-                        default:
-                             $pVal = '<td>
-                                        <table style="width:100%; border:solid;">
-                                            <tr>
-                                                <th style="width: 25%;"><h5 style = "text-align: center;" > On </h5></th>
-                                                <th style="width: 25%;"><h5 style = "text-align: center;" > Auto </h5></th>
-                                                <th style="width: 25%;"><h5 style = "text-align: center;" > Off </h5></th>
-                                            </tr>
-                                            <form method="post" action="CheeseMainPage.php?b=1&t='. $type . '">
-                                                <tr>
-                                                    <td>
-                                                        <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
-                                                    </td>
-                                                    <td>
-                                                        <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
-                                                    </td>
-                                                    <td>
-                                                        <button id="btnIO" style="background-color:transparent;"><img src="img/onButton.jpeg"></button>
-                                                    </td>
-                                                </tr>
+                                        </td>
+                                        <td>
+                                            <form method="post" action="CheeseMainPage.php?b=1&t='. $type . 'a">
+                                                <button id="btnIO" style="background-color:transparent;"><img src="img/' . $auto . 'Button.jpeg"></button>
                                             </form>
-                                        </table>
-                                    </td>';
-                            break;
-                        }
-                }
-                echo $pVal;
+                                        </td>
+                                        <td>
+                                            <form method="post" action="CheeseMainPage.php?b=1&t='. $type . 'i">
+                                                <button id="btnIO" style="background-color:transparent;"><img src="img/onButton.jpeg"></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>';
+                    } else {
+                        $pVal = '
+                            <td>
+                                <table style="width:100%; border:solid;">
+                                    <tr>
+                                        <th style="width: 25%;"><h5 style = "text-align: center;" > Off </h5></th>
+                                        <th style="width: 25%;"><h5 style = "text-align: center;" > Auto </h5></th>
+                                        <th style="width: 25%;"><h5 style = "text-align: center;" > On </h5></th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <form method="post" action="CheeseMainPage.php?b=1&t='. $type . 'o">
+                                                <button id="btnIO" style="background-color:transparent;"><img src="img/onButton.jpeg"></button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form method="post" action="CheeseMainPage.php?b=1&t='. $type . 'a">
+                                                <button id="btnIO" style="background-color:transparent;"><img src="img/' . $auto . 'Button.jpeg"></button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form method="post" action="CheeseMainPage.php?b=1&t='. $type . 'i">
+                                                    <button id="btnIO" style="background-color:transparent;"><img src="img/offButton.jpeg"></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>';
+                    }
+            echo $pVal;
             }
-        
             #Transformers/Accessors
             function GetTempUpper(){
                 $Query = "SELECT value FROM Settings WHERE name='TempUpper'";
@@ -180,7 +190,6 @@
                         $rVal = "I";
                         break;
                 }
-                
                 return $rVal;
             }
             

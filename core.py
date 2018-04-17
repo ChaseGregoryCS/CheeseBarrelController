@@ -13,7 +13,7 @@ class sqlOBJ:
     
     def __init__(self):
         try:
-            self.db_conn = mysql.connect(user='root', password='Ch33se', host='localhost', database='cheesedatabase')
+            self.db_conn = mysql.connect(user='---', password='---', host='---', database='---')
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
                 print("Something is wrong with your user name or password")
