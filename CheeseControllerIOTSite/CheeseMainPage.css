@@ -39,6 +39,10 @@ div.lowerRng{
     float: left;
 }
 
+button.btnIO{
+    margin-left: 2%;
+}
+
 div.rangeBar{
     float: center;
     padding-left: 30%

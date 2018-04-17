@@ -28,6 +28,7 @@
                                     $Obj->SetManualState($temp);
                                     break;
                                 }
+                                break;
                         case 'CO':
                             switch($io){
                                 case 'i':
