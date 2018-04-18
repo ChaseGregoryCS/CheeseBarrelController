@@ -4,10 +4,15 @@
 <html>
     <head>
         <link rel="stylesheet" href="CheeseMainPage.css">
-        <div style="background-color: gray;" >
+        <div style="background-color:#696969" >
             <div class="headerDivOne">
-                <h2 class="subtitle"> Cheese Controller </h2>
-                <h2 class="maintitle">Data View</h2>
+                <h2 class="subtitle">Cheese Barrel Controller</h2>
+                <h3 class="maintitle">
+                    <br/>
+                    <br/>
+                    <button id="btnIO" style="background-color:transparent;margin-left: 40%; margin-top: 3%;"><img src="img/offButton.jpeg"></button>
+                </h2>
+                
             </div>
 
             <br/>
@@ -33,6 +38,9 @@
                 </div>
                 <br/>
                 <br/>
+                <div class="upperRng" />
+                      Update Rate <input class="rangeInput" style="float: left; margin-left:15%;" type="text" size="3" name="Temp_Lower_Range"><br>
+                </div>
                 <input class="txt_rangeSubmit" type="submit" value="Submit">
                 
                 <div>
@@ -141,7 +149,9 @@
     <br />
     
     <body bgcolor="gray">
+
         <div class="bodyDivMain" >
+            <h2 style="text-align:center;"> Data View <h2/>
             <table style="width:100%; margin-bottom:5%;">
                 <tr>
                     <th style="width: 25%;"><h5 style = "text-align: center;" > Temperature V Time </h5></th>

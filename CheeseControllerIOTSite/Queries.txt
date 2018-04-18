@@ -21,3 +21,5 @@ INSERT INTO Settings VALUES
     (6,"Update", "5"),
     (7,"CaptureRate", "10"),
     (8,"SystemIO", "On");
+
+UPDATE Settings SET value='11' WHERE name='CaptureRat';

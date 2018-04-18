@@ -25,7 +25,7 @@
         
         protected function RunQuerry($Query){
                 $rVal = false;
-                
+
                 $response = $this->dbo->dbc->query($Query);
                 if (!$response){
                     $rVal = "Error! " . $this->dbo->dbc->error;
@@ -46,6 +46,21 @@
             }
         
             #Button Control
+            function TglSystemStatusBtn(){
+                $status = strtolower($this->GetSystemIO());
+                if($status == "on"){
+                    $this->SetSystemIO("off");
+                } else {
+                    $this->SetSystemIO("on");
+                }
+            }
+            
+            #DisplaySystemButtons
+            function DisplayStatusBtn(){
+                $status = $this->GetSystemIO();
+                echo '<button id="btnIO" style="background-color:transparent;margin-left: 40%; margin-top: 3%;"><img src="img/' . $status . 'Button.jpeg"></button>';
+            }
+            
             function DisplayControlButton($type){
                 $ctlArr = $this->GetControlArr();
                 if ($this->StateOf($type) == strtoupper($this->StateOf($type))){
@@ -113,6 +128,7 @@
                     }
             echo $pVal;
             }
+            
             #Transformers/Accessors
             function GetTempUpper(){
                 $Query = "SELECT value FROM Settings WHERE name='TempUpper'";
@@ -150,7 +166,7 @@
             }
             
             function GetCaptureRate(){
-                $Query = "SELECT value FROM Settings WHERE name='CaptureRate'";
+                $Query = "SELECT value FROM Settings WHERE name='CaptureRat'";
                 $rVal = $this->RunQuerry($Query);
                 if(! $rVal) {return "error";}
                 return $rVal;
@@ -192,15 +208,13 @@
                 }
                 return $rVal;
             }
-            
-            
+                        
             function SetManualState($state){
                 $Query = "UPDATE Settings SET value='" . $state . "' WHERE name='State'";
                 $rVal = $this->RunQuerry($Query);
                 if(! $rVal) {echo "error";}
                 return $rVal;
             }
-            
             
             function SetTempUpper($value){
                 $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='TempUpper'";
@@ -238,14 +252,14 @@
             }
             
             function SetCaptureRate($value){
-                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='SystemIO'";
+                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='CaptureRat'";
                 $rVal = $this->RunQuerry($Query);
                 if(! $rVal) {echo "error";}
                 return $rVal;
             }
             
             function SetSystemIO($value){
-                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='State'";
+                $Query = "UPDATE Settings SET value='" . $value . "' WHERE name='SystemIO'";
                 $rVal = $this->RunQuerry($Query);
                 if(! $rVal) {echo "error";}
                 return $rVal;
