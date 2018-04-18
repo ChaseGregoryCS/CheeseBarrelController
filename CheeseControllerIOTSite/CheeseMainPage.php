@@ -172,6 +172,7 @@
     
     <body bgcolor="gray">
         <div class="bodyDivMain"  >
+            <h2 style="text-align:center;"> Data View <h2/>
             <table style="width:100%; margin-bottom:5%;">
                 <tr>
                     <th style="width: 25%;"><h5 style = "text-align: center;" > Temperature V Time </h5></th>

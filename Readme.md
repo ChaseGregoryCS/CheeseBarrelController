@@ -6,8 +6,8 @@
 ######  	(Prefferred: Arch-Arm 4.14) Linux, Apache, Mysql, PHP7, Python 2.*, R
 ######  	Ras Pi 2+
  
-	We dont want to have the heater on at the same time as the cooler <br/>
-	nor Humidifier and DeHumidifier. So either one is on and the other <br/> 
+	We dont want to have the heater on at the same time as the cooler 
+	nor Humidifier and DeHumidifier. So either one is on and the other 
 	is off OR they are both off. 
 
 	<value1> 'n' <value2> eg: InI
