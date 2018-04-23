@@ -3,7 +3,7 @@
 ## Author: Chase Gregory, 2018
 ###### This is a LAMP IoT Device
 ###### Dependencies
-######  	(Prefferred: Arch-Arm 4.14) Linux, Apache, Mysql, PHP7, Python 2.*, R, C
+######  	(Prefferred: Arch-Arm 4.14) Linux, Apache, Mysql, PHP7, Python 2.*, Node.js, C
 ######  	Ras Pi 2 or newer, DHT11 Sensor 
 
 ##	Overview
@@ -72,4 +72,8 @@
 	There is a Site included in this project. This means it is remotely 
 	possible to change states, manually override a state, change system
 	ranges for auto control, view data, output and status of the systems.
-	 
+	
+	The site uses an open source library called smoothie. It allows for 
+	real time plotting of the data we are getting from the sensor. 	 
+
+	
