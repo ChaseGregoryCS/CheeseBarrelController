@@ -3,6 +3,9 @@
 
 <html>
     <head>
+        <script type="text/javascript" src="Charts/smoothie.js"></script>
+    
+    
         <?php 
             require_once('php/setting.php');
             $Obj = new ControllerInterface();
@@ -173,36 +176,49 @@
     <body bgcolor="gray">
         <div class="bodyDivMain"  >
             <h2 style="text-align:center;"> Data View <h2/>
-            <table style="width:100%; margin-bottom:5%;">
-                <tr>
-                    <th style="width: 25%;"><h5 style = "text-align: center;" > Temperature V Time </h5></th>
-                    <th style="width: 25%;"><h5 style = "text-align: center;" > Humidity V Temperature </h5></th>
-                    <th style="width: 25%;"><h5 style = "text-align: center;" > Humidity V Time </h5></th>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="Charts/SolutionVTime.jpeg" alt="Temp v Time" width="100%" ><img/>
-                    </td>
-                    <td>
-                        <img src="Charts/SolutionVTime.jpeg" alt="Temp v Time" width="100%"><img/>
-                    </td>
-                    <td>
-                        <img src="Charts/SolutionVTime.jpeg" alt="Temp v Time" width="100%"><img/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <-------------------------------------------o-------------------------------------->
-                    </td>
-                    <td>
-                        <-------------------------------------------o-------------------------------------->
-                    </td>
-                    <td>
-                        <-------------------------------------------o-------------------------------------->
-                    </td>
-                </tr>
-            </table>
-                
+            <div style="float:right; margin-right:3%; margin-bottom:3%;">
+                <canvas id="temperature" height= 200 width =800 style="float: right; margin 25%"></canvas>
+                <script type="text/javascript">
+                    var updateRate = <?php echo $Obj->GetCaptureRate(); ?>
+                    // Random data
+                    var temp = new TimeSeries();
+                    setInterval(function() {
+                        temp.append(new Date().getTime(), Math.random());
+                    }, (updateRate * 360));
+
+                    var smoothieT = new SmoothieChart({ grid: {lineWidth: 1, millisPerLine: (updateRate * 360) ,verticalSections: 6 } });
+                    smoothieT.addTimeSeries(temp, { strokeStyle: 'rgb(255, 0, 0)', fillStyle: 'rgba(125, 0, 0, 0.4)', lineWidth: 3 });
+                    
+                    smoothieT.streamTo(document.getElementById("temperature"), (updateRate * 360));
+                </script>
+            </div>
+            <div  style="float:left; margin-left:25%; margin-bottom:3%;">
+                Current Humidity
+                <p id="temp"><?php $Obj->GetCurrHum(); ?></p>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div style="float:right; margin-right:3%; margin-bottom:3%;margin-top:3%;">
+                <canvas id="humididty" height= 200 width =800 style="float: right; margin 25%"></canvas>
+                <script type="text/javascript">
+                    var updateRate = <?php echo $Obj->GetCaptureRate(); ?>
+                    // Random data
+                    var humididty = new TimeSeries();
+                    setInterval(function() {
+                        humididty.append(new Date().getTime(), Math.random());
+                    }, (updateRate * 360));
+
+                    var smoothieH = new SmoothieChart({ grid: {lineWidth: 1, millisPerLine: (updateRate * 360), verticalSections: 6 } });
+                    smoothieH.addTimeSeries(humididty, {strokeStyle: 'rgb(0, 0, 255)', fillStyle: 'rgba(0, 0, 125, 0.4)', lineWidth: 3 });
+                    
+                    smoothieH.streamTo(document.getElementById("humididty"), (updateRate * 360));
+                </script>
+            </div>
+            <div   style="float:left; margin-left:25%; margin-bottom:3%;">
+                Current Temperature
+                <p id="temp"><?php $Obj->GetCurrTemp(); ?></p>
             </div>
         </div>
     </body>

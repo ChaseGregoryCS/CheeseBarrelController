@@ -46,6 +46,18 @@
             }
         
             #Button Control
+            function tglRealSystem(){
+                $old_path = getcwd();
+                chdir('/scripts/');
+                $status = strtolower($this->GetSystemIO());
+                if($status == "on"){
+                    $output = shell_exec('./ToggleSystem.sh s');
+                } else {
+                    $output = shell_exec('./ToggleSystem.sh o');
+                }
+                chdir($old_path);
+            }
+            
             function TglSystemStatusBtn(){
                 $status = strtolower($this->GetSystemIO());
                 if($status == "on"){
@@ -130,6 +142,20 @@
             }
             
             #Transformers/Accessors
+            function GetCurrTemp(){
+                $Query = "SELECT TOP 1 temperature FROM Stats ORDER BY StateID DESC";
+                $rVal = $this->RunQuerry($Query);
+                if(! $rVal) {return "error";}
+                return $rVal;
+            }
+            
+            function GetCurrHum(){
+                $Query = "SELECT TOP 1 humidity FROM Stats ORDER BY StateID DESC";
+                $rVal = $this->RunQuerry($Query);
+                if(! $rVal) {return "error";}
+                return $rVal;
+            }
+            
             function GetTempUpper(){
                 $Query = "SELECT value FROM Settings WHERE name='TempUpper'";
                 $rVal = $this->RunQuerry($Query);
