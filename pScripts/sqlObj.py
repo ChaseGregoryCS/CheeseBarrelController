@@ -1,7 +1,7 @@
 #!bin/python
 import sys
 import datetime
-import MySQLdb
+import _mysql
 
 #This is the core
 #it reads settings from the cheesedatabase then makes actions according to the settings
@@ -13,7 +13,7 @@ class sqlOBJ:
     
     def __init__(self):
         try:
-            self.db_conn = mysql.connect(user='---', password='---', host='---', database='---')
+            self.db_conn = _mysql.connect(user='---', password='---', host='---', database='---')
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
                 print("Something is wrong with your user name or password")

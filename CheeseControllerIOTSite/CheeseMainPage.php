@@ -20,78 +20,13 @@
                 } elseif($get_array['b'] == '1') {
                     $currState = $Obj->GetState();
                     $io = substr($get_array['t'],2);
-                    switch (substr($get_array['t'],0,2)){
-                        case 'HE':
-                            switch($io){
-                                case 'i':
-                                    $temp = "h" . substr($currState,1);
-                                    $Obj->SetManualState($temp);
-                                    break;
-                                case 'o':
-                                    $temp = "i" . substr($currState,1);
-                                    $Obj->SetManualState($temp);
-                                    break;
-                                }
-                                break;
-                        case 'CO':
-                            switch($io){
-                                case 'i':
-                                    $temp = "c" . substr($currState,1);
-                                    $Obj->SetManualState($temp);
-                                    break;
-                                case 'o':
-                                    $temp = "i" . substr($currState,1);
-                                    $Obj->SetManualState($temp);
-                                    break;
-                                }
-                            break;
-                        case 'HU':
-                            switch($io){
-                                case 'i':
-                                    $temp = substr($currState,0,2) . "h";
-                                    $Obj->SetManualState($temp);
-                                    break;
-                                case 'o':
-                                    $temp =  substr($currState,0,2) . "i";
-                                    $Obj->SetManualState($temp);
-                                    break;
-                                }
-                            break;
-                        case 'DH':
-                            switch($io){
-                                case 'i':
-                                    $temp = substr($currState,0,2) . "d";
-                                    $Obj->SetManualState($temp);
-                                    break;
-                                case 'o':
-                                    $temp =  substr($currState,0,2) . "i";
-                                    $Obj->SetManualState($temp);
-                                    break;
-                                }
-                            break;
-                        }
-                        if($io == 'a'){
-                            $currState = $Obj->GetState();
-                            switch (substr($get_array['t'],0,2)){
-                                case 'HE':
-                                case 'CO':
-                                    $temp = strtoupper(substr($currState,0,1)) . substr($currState,1);
-                                    $Obj->SetManualState($temp);
-                                    break;
-                                case 'HU':
-                                case 'DH':
-                                    $temp = substr($currState,0,2) . strtoupper(substr($currState,2));
-                                    $Obj->SetManualState($temp);
-                                    break;
-                            }
-                        }
-                    } else {
-                        $Obj->TglSystemStatusBtn();
-                        
-                    }
-                    $url = "CheeseMainPage.php";
-                    header('Location: '.$url);
+                    $Obj->controlDistplay(substr($get_array['t'],0,2),$io);
+                } else {
+                    $Obj->TglSystemStatusBtn();
                 }
+                $url = "CheeseMainPage.php";
+                header('Location: '.$url);
+            }
         ?>
         <link rel="stylesheet" href="CheeseMainPage.css">
         <div style="background-color: #696969;" >

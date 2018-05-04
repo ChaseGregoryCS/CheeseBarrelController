@@ -12,8 +12,8 @@ class StateMachine:
         
     def Capture(dbo):
         #TODO:Hardware inputs
-        th = dbo.GetOneValueStatsQuerry("temperature")
-        tt = dbo.GetOneValueStatsQuerry("humidity")
+        th = random.uniform(0,105)
+        tt = random.uniform(0,105)
         return [tt,tt,th,th]
     
     def TakeAction():
